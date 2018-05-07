@@ -45,3 +45,19 @@ const templateStream = fs.createReadStream(template, streamOptions)
 
 // Compose useful things
 const camelcaseAlphanumeric = compose(camelcase, onlyAlphanumeric)
+
+templateStream
+  .on('data', template => {
+
+    csv
+      .fromStream(dataStream, { headers: true })
+      .on('data', church => {
+
+        const writeFile = `${writeFolder}${camelcaseAlphanumeric(church.churchname)}-merged.txt`
+        const writeStream = fs.createWriteStream(writeFile)
+
+        writeStream.write(templateEngine(template, church))
+        writeStream.end()
+      })
+
+  })
