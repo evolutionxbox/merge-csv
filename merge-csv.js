@@ -33,3 +33,12 @@ if (!fs.existsSync(writeFolder)) {
     if (err.code !== 'EEXIST') throw err
   }
 }
+
+// Encoding of files
+const streamOptions = {
+  encoding: 'utf8'
+}
+
+// Streams
+const dataStream = fs.createReadStream(data, streamOptions)
+const templateStream = fs.createReadStream(template, streamOptions)
