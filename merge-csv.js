@@ -42,3 +42,6 @@ const streamOptions = {
 // Streams
 const dataStream = fs.createReadStream(data, streamOptions)
 const templateStream = fs.createReadStream(template, streamOptions)
+
+// Compose useful things
+const camelcaseAlphanumeric = compose(camelcase, onlyAlphanumeric)
