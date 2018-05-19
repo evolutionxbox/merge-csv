@@ -13,10 +13,33 @@ const onlyAlphanumeric = requirer('only-alphanumeric')
 const compose = requirer('compose')
 
 // Node CLI Arguements
-const args = [...process.argv]
-const data = args[2]
-const template = args[3]
-const writeFolder = `${args[4]}/` || `${__dirname}/_merged/`
+const argv = require('yargs')
+  .usage('Usage: merge-csv -data path/to/data.csv -template path/to/template.csv -output path/to/ouput/')
+  .option('data', {
+    alias: 'd',
+    demandOption: true,
+    describe: 'Relative or absolute path to the data CSV file',
+    type: ''
+  })
+  .option('template', {
+    alias: 't',
+    demandOption: true,
+    describe: 'Relative or absolute path to the template CSV file',
+    type: ''
+  })
+  .option('output', {
+    alias: 'o',
+    demandOption: false,
+    default: './merged/',
+    describe: 'Relative or absolute path to the output folder',
+    type: ''
+  })
+  .help('h', 'Show this help')
+  .alias('h', 'help')
+  .epilog('Please email info@joncousins.co.uk with any bugs')
+  .argv
+
+const { data, template, output } = argv
 
 if (!fs.existsSync(data)) {
   throw new Error('data file must exist!')
@@ -26,9 +49,9 @@ if (!fs.existsSync(template)) {
   throw new Error('template file must exist!')
 }
 
-if (!fs.existsSync(writeFolder)) {
+if (!fs.existsSync(output)) {
   try {
-    fs.mkdirSync(writeFolder)
+    fs.mkdirSync(output)
   } catch (err) {
     if (err.code !== 'EEXIST') throw err
   }
