@@ -53,7 +53,7 @@ templateStream
       .fromStream(dataStream, { headers: true })
       .on('data', church => {
 
-        const writeFile = `${writeFolder}${camelcaseAlphanumeric(church.churchname)}-merged.txt`
+        const writeFile = `${output}${camelcaseAlphanumeric(church.churchname)}-merged.csv`
         const writeStream = fs.createWriteStream(writeFile)
 
         writeStream.write(templateEngine(template, church))
