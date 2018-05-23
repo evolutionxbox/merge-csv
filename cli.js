@@ -5,38 +5,38 @@
 const csv = require('fast-csv')
 const fs = require('fs')
 const camelcase = require('camelcase')
+const chalk = require('chalk')
 
 // Custom requires
-const requirer = require('./custom_modules/require-custom')(`${__dirname}/custom_modules`)
-const templateEngine = requirer('template-engine')
-const onlyAlphanumeric = requirer('only-alphanumeric')
-const compose = requirer('compose')
+const templateEngine = require('./lib/template-engine')
+const onlyAlphanumeric = require('./lib/only-alphanumeric')
+const compose = require('./lib/compose')
 
 // Node CLI Arguements
 const argv = require('yargs')
-  .usage('Usage: merge-csv -data path/to/data.csv -template path/to/template.csv -output path/to/ouput/')
-  .option('data', {
-    alias: 'd',
+  .usage(chalk.yellow('Usage: merge-csv -data path/to/data.csv -template path/to/template.csv -output path/to/ouput/'))
+  .option(chalk.green('data'), {
+    alias: chalk.green('d'),
     demandOption: true,
     describe: 'Relative or absolute path to the data CSV file',
     type: ''
   })
-  .option('template', {
-    alias: 't',
+  .option(chalk.green('template'), {
+    alias: chalk.green('t'),
     demandOption: true,
     describe: 'Relative or absolute path to the template CSV file',
     type: ''
   })
-  .option('output', {
-    alias: 'o',
+  .option(chalk.green('output'), {
+    alias: chalk.green('o'),
     demandOption: false,
     default: './merged/',
     describe: 'Relative or absolute path to the output folder',
     type: ''
   })
-  .help('h', 'Show this help')
-  .alias('h', 'help')
-  .epilog('Please email info@joncousins.co.uk with any bugs')
+  .help(chalk.blue('h'), 'Show this help')
+  .alias(chalk.blue('h'), chalk.blue('help'))
+  .epilog(chalk.yellow('Please email info@joncousins.co.uk with any bugs'))
   .argv
 
 const { data, template, output } = argv
