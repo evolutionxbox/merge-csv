@@ -23,6 +23,19 @@ Clone this repo:
 
     git clone https://github.com/evolutionxbox/merge-csv.git
 
+Open the folder:
+
+    cd merge-csv
+
+Install it's dependencies:
+
+    npm i
+
+And finally make it available to use elsewhere:
+
+    npm link
+
+
 ### Usage
 
-You can now type `merge-csv -h` anywhere to see the tool's help.
+You can now type `merge-csv` anywhere to use the cli tool. Type `merge-csv -h` to see the tool's help.
