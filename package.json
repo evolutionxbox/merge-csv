@@ -17,7 +17,7 @@
     "camelcase": "^5.0.0",
     "chalk": "^2.4.1",
     "fast-csv": "^2.4.1",
-    "yargs": "^11.0.0"
+    "yargs": "^15.0.1"
   },
   "bin": {
     "merge-csv": "cli.js"
